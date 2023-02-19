@@ -23,7 +23,7 @@ class myanimelist:
         img2 = img[1].split()[0]
         title = (item.findAll("a")[1].text)
         while True:
-          if title.find('\n') == -1:
+          if title.find('"') == -1:
             break
           title = title.replace('"',"")
         data = data +  "{"+f'"type": "{type}","title": "{title}", "link": "{link}", "img" : ["{img1}","{img2}"]'+"},"
