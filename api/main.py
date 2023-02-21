@@ -19,11 +19,12 @@ def search():
   
   
 @app.route("/api/v1/manga")
-def anime():
+def manga():
   chapters = request.args.get("id")
   return ""
 
 @app.route("/api/v1/top")
+def topManga()
   page = request.args.get("page")
   data = myanimelist.topMangas(page)
   return data
