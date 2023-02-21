@@ -47,7 +47,7 @@ class myanimelist:
 
     def topMangas(page):
       r = get(base_manga_url+f"ranking.json?offset={30*(int(page)-1)}")
-      return json.loads(r.txt)
+      return json.loads(r.text)
       
       
 if __name__ == "__main__":
