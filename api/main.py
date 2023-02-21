@@ -24,7 +24,7 @@ def getmanga():
   return ""
 
 @app.route("/api/v1/top")
-def topManga()
+def topManga():
   page = request.args.get("page")
   data = myanimelist.topMangas(page)
   return data
