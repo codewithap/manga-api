@@ -19,7 +19,7 @@ def search():
   
   
 @app.route("/api/v1/manga")
-def manga():
+def getmanga():
   chapters = request.args.get("id")
   return ""
 
