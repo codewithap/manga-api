@@ -18,12 +18,15 @@ def search():
   return data
   
   
-@app.route("/api/v1/anime")
+@app.route("/api/v1/manga")
 def anime():
   chapters = request.args.get("id")
   return ""
 
-
-
+@app.route("/api/v1/top")
+  page = request.args.get("page")
+  data = myanimelist.topMangas(page)
+  return data
+  
 if __name__ == "__main__":
   app.run(host = "0.0.0.0", debug=True)
