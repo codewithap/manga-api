@@ -8,32 +8,37 @@ base_url = "https://mangafire.to/filter?keyword="
 
 class mangafire:
     def __init__(self,query,base_url,):
-        super().__init__(query,base_url)
-        self.url = base_url
-        self.query = query
+        pass
 
 
-    def search(self):
-        r = get(self.url+ self.query)
+    def search(query):
+        r = get(base_url+ query)
         soup = bs(r.text,"html.parser")
         list = soup.select(".mangas .item")
         data = '{"data": ['
         for item in list:
-            link = item.find("a")["href"]
+            link = item.find("a")["href"].replace("/manga/","")
             img = item.find("img")["src"]
             title = item.findAll("a")[1].text
-            info = "{" + f'"img" :"{img}", "title": "{title}", "link": "{link}"'+ "},"
+            info = "{" + f'"img" :"{img}", "title": "{title}", "id": "{link}"'+ "},"
             data = data + info
         jsonData = data[:-1] + ']}'
         return json.loads(jsonData)
     
-    def getChapters(self):
-        r = get(self+ self)
+    def getChapters(id):
+        r = get("https://mangafire.to/manga/"+id)
         soup = bs(r.text,"html.parser")
-        list = soup.select(".mangas .item")
+        list = soup.find("ul", {"data-name": "EN"}).select("li")
         data = '{"data": ['
-        return self
+        for item in list: 
+          link = item.find("a")["href"]
+          title = item.find("a")["title"]
+          info = "{" + f'"link" :"{link}", "title": "{title}"'+ "},"
+          data = data + info
+        jsonData = data[:-1] + ']}'
+        return json.loads(jsonData)
 
 
 if __name__ == "__main__":
-    print(mangafire.getChapters("bleach"))
+    print(mangafire.search("one punch man"))
+    

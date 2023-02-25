@@ -35,21 +35,31 @@ class myanimelist:
         jsonData = data[0:-1] + ']}'
         return json.loads(jsonData)
 
+
     def manga(id):
-      not_found = {"error" : "File not found","massage" : f"Id  '{id}' did not match any documents"}
+      not_found = {"error" : "File not found","massage" : f"Id  '{id}' did not match any mangas"}
+      info_dict = {}
       r = get(base_manga_url+ str(id))
       soup = bs(r.text,"html.parser")
-      img = soup.select(".status-block .icon-thumb")[0]["data-image"]
-      print(img)
-      data = '{"data": ['
-      if len(list) == 0:
-        return not_found
+      img = soup.select("img.ac")[0]["data-src"]
+      synopsis = soup.find("span", {"itemprop": "description"}).text
+      for item in soup.select(".dark_text"):
+        i = (item.parent.text).split(":")
+        if i[0].strip("\n") not in ["Genres","Serialization","Theme","Demographic","Favorites","Members"]:
+          if i[0].strip("\n").strip(" ") not in ["Score", "Ranked", "Themes"]:
+            info_dict[i[0].strip("\n").strip(" ").lower()] = i[1].strip("\n").strip(" ").strip("\t")
+          else: 
+            info_dict[i[0].strip("\n").strip(" ").lower()] = i[1].strip("\n").strip(" ").strip("\t").split(" ")[0]
+      info_dict["img"] = img
+      info_dict["synopsis"] = synopsis
+      return info_dict
 
+ 
     def topMangas(page):
       r = get(base_manga_url+f"ranking.json?offset={30*(int(page)-1)}")
       return json.loads(r.text)
       
       
 if __name__ == "__main__":
-  print(myanimelist.manga(11))
-
+  print(
+  myanimelist.manga(101))
