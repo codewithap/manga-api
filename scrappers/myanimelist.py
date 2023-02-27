@@ -42,7 +42,9 @@ class myanimelist:
       r = get(base_manga_url+ str(id))
       soup = bs(r.text,"html.parser")
       img = soup.select("img.ac")[0]["data-src"]
-      synopsis = soup.find("span", {"itemprop": "description"}).text
+      synopsis = soup.find("span", {"itemprop": "description"})
+      if synopsis != None:
+        synopsis = synopsis.text
       for item in soup.select(".dark_text"):
         i = (item.parent.text).split(":")
         if i[0].strip("\n") not in ["Genres","Serialization","Theme","Demographic","Favorites","Members"]:
