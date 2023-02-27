@@ -23,7 +23,7 @@ class mangafire:
             info = "{" + f'"img" :"{img}", "title": "{title}", "id": "{link}"'+ "},"
             data = data + info
         jsonData = data[:-1] + ']}'
-        return jsonData #json.loads(jsonData)
+        return soup #json.loads(jsonData)
     
     def getChapters(id):
         r = get("https://mangafire.to/manga/"+id)
