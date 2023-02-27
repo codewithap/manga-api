@@ -7,7 +7,7 @@ base_url = "https://mangafire.to/filter?keyword="
 
 
 class mangafire:
-    def __init__(self,query,base_url,):
+    def __init__(self):
         pass
 
 
