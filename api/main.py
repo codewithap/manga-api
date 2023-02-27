@@ -14,7 +14,7 @@ def home():
 ## myanimelist search ##
 @app.route("/api/v1/search/<string:q>")
 def search(q):
-  data = myanimelist.search(q)
+  data = manganelo.search(q)
   return data
 
 ## mangafire search ##
