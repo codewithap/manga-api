@@ -18,7 +18,7 @@ def search(q):
   return data
 
 ## mangafire search ##
-@app.route("/api/v1/search/mangafire/<q>")
+@app.route("/api/v1/mangafire/search/<q>")
 def mangaFireSearch(q):
   data = mangafire.search(q)
   return data
@@ -30,13 +30,13 @@ def anime(id):
   return data
 
 ## get chapters from mangafire ##
-@app.route("/api/v1/chapters/mangafire/<name>")
+@app.route("/api/v1/mangafire/chapters/<name>")
 def chapters(name): 
   mangaFireId = mangafire.search(name)
   chapData = mangafire.search(mangafireId)
   return chapData
 
-## list of top animes from manga fire ##
+## list of top animes from myanimelist ##
 @app.route("/api/v1/top")
 def topAnime(): 
   page = request.args.get("page")
