@@ -7,7 +7,7 @@ class manganelo:
     self.base_url = "https://ww5.manganelo.tv/"
 
   def search(query): 
-    r = requests.get(f"https://ww5.manganelo.tv/search/{query}").text
+    r = requests.get(f"https://m.manganelo.com/search/{query}").text
     soup = bs(r, 'html.parser')
     html = soup.select(".panel-search-story .search-story-item")
     data = '{"data": ['
