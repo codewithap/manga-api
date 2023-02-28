@@ -17,8 +17,8 @@ def search(q):
   data = manganelo.search(q)
   return data
 
-## mangafire search ##
-@app.route("/api/v1/mangafire/search/<q>")
+## manganelo search ##
+@app.route("/api/v1/manganelo/search/<q>")
 def mangaFireSearch(q):
   data = mangafire.search(q)
   return data
@@ -29,11 +29,10 @@ def anime(id):
   data = myanimelist.manga(id)
   return data
 
-## get chapters from mangafire ##
-@app.route("/api/v1/mangafire/chapters/<name>")
+## get chapters from manganelo ##
+@app.route("/api/v1/manganelo/chapters/<name>")
 def chapters(name): 
-  mangaFireId = mangafire.search(name)
-  chapData = mangafire.search(mangafireId)
+  chapData = manganelo.getChapters(id)
   return chapData
 
 ## list of top animes from myanimelist ##
